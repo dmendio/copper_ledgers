@@ -5,7 +5,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.ContainerInput;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -72,7 +72,7 @@ public class CopperLedgerMenu extends AbstractContainerMenu {
      * because all data mutations happen server-side.
      */
     public CopperLedgerMenu(int syncId, Inventory playerInventory) {
-        this(syncId, playerInventory, playerInventory.selected);
+        this(syncId, playerInventory, playerInventory.getSelectedSlot());
     }
 
     /**
@@ -125,9 +125,9 @@ public class CopperLedgerMenu extends AbstractContainerMenu {
      * No physical items are moved. Clicks either add or remove item types from the ledger data.
      */
     @Override
-    public void clicked(int slotIndex, int button, ClickType clickType, Player player) {
+    public void clicked(int slotIndex, int button, ContainerInput clickType, Player player) {
         // Only process simple pickup clicks (left/right click)
-        if (clickType != ClickType.PICKUP) {
+        if (clickType != ContainerInput.PICKUP) {
             // Suppress all other click types (shift-click, drag, swap, clone, throw)
             return;
         }

@@ -49,7 +49,7 @@ public class CopperLedger extends Item {
         // Determine the slot index of the ledger in the player's inventory
         // Offhand is slot 40 in the player's Inventory
         int slotIndex = hand == InteractionHand.MAIN_HAND
-            ? player.getInventory().selected
+            ? player.getInventory().getSelectedSlot()
             : 40;
 
         // Open the ledger menu
