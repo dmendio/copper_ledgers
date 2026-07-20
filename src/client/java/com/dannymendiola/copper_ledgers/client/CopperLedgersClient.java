@@ -9,6 +9,6 @@ public class CopperLedgersClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		// Register the Copper Ledger screen factory
-		// MenuScreens.register(ModMenuTypes.COPPER_LEDGER_MENU, CopperLedgerScreen::new);
+		MenuScreens.register(ModMenuTypes.COPPER_LEDGER_MENU, CopperLedgerScreen::new);
 	}
 }
