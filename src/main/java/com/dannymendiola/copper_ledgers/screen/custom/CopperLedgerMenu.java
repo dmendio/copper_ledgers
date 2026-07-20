@@ -1,4 +1,9 @@
-package com.dannymendiola.copper_ledgers;
+package com.dannymendiola.copper_ledgers.screen.custom;
+
+import com.dannymendiola.copper_ledgers.CopperLedger;
+import com.dannymendiola.copper_ledgers.ModMenuTypes;
+import com.dannymendiola.copper_ledgers.component.LedgerContents;
+import com.dannymendiola.copper_ledgers.component.ModComponents;
 
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.SimpleContainer;
@@ -83,7 +88,7 @@ public class CopperLedgerMenu extends AbstractContainerMenu {
         if (ledgerStack.isEmpty() || !(ledgerStack.getItem() instanceof CopperLedger)) {
             return LedgerContents.EMPTY;
         }
-        LedgerContents contents = ledgerStack.get(ModDataComponents.LEDGER_CONTENTS);
+        LedgerContents contents = ledgerStack.get(ModComponents.LEDGER_CONTENTS);
         return contents != null ? contents : LedgerContents.EMPTY;
     }
 
@@ -97,10 +102,10 @@ public class CopperLedgerMenu extends AbstractContainerMenu {
 
         if (contents.isEmpty()) {
             // Remove the component entirely when empty
-            ledgerStack.remove(ModDataComponents.LEDGER_CONTENTS);
+            ledgerStack.remove(ModComponents.LEDGER_CONTENTS);
             ledgerStack.set(DataComponents.MAX_STACK_SIZE, 64);
         } else {
-            ledgerStack.set(ModDataComponents.LEDGER_CONTENTS, contents);
+            ledgerStack.set(ModComponents.LEDGER_CONTENTS, contents);
             ledgerStack.set(DataComponents.MAX_STACK_SIZE, 1);
         }
     }

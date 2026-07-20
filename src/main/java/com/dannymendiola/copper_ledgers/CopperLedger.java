@@ -1,9 +1,7 @@
 package com.dannymendiola.copper_ledgers;
 
+import com.dannymendiola.copper_ledgers.screen.custom.CopperLedgerMenu;
 
-import java.util.List;
-
-import net.minecraft.client.renderer.gizmos.DrawableGizmoPrimitives.Text;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;

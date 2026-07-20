@@ -1,7 +1,7 @@
 package com.dannymendiola.copper_ledgers.client;
 
-import com.dannymendiola.copper_ledgers.CopperLedgerMenu;
 import com.dannymendiola.copper_ledgers.CopperLedgers;
+import com.dannymendiola.copper_ledgers.screen.custom.CopperLedgerMenu;
 
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
