@@ -2,6 +2,9 @@ package com.dannymendiola.copper_ledgers;
 
 import java.util.function.Function;
 
+import com.dannymendiola.copper_ledgers.component.LedgerTooltip;
+import com.dannymendiola.copper_ledgers.component.ModComponents;
+
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -15,7 +18,7 @@ public class ModItems {
     
     public static final Item COPPER_LEDGER = registerItem(
         "copper_ledger", props -> new CopperLedger(
-            props.stacksTo(1)
+            props.component(ModComponents.LEDGER_TOOLTIP, new LedgerTooltip())
         ));
 
     private static Item registerItem(String name, Function<Item.Properties, Item> function) {

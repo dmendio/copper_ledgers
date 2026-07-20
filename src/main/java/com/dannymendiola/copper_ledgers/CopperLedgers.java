@@ -1,11 +1,14 @@
 package com.dannymendiola.copper_ledgers;
 
 import net.fabricmc.api.ModInitializer;
-
+import net.fabricmc.fabric.api.item.v1.ItemComponentTooltipProviderRegistry;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.dannymendiola.copper_ledgers.component.ModComponents;
 
 public class CopperLedgers implements ModInitializer {
 	public static final String MOD_ID = "copper_ledgers";
@@ -17,12 +20,13 @@ public class CopperLedgers implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		// This code runs as soon as Minecraft is in a mod-load-ready state.
-		// However, some things (like resources) may still be uninitialized.
-		// Proceed with mild caution.
+		LOGGER.info("Hello Copper Ledgers!");
 
-		LOGGER.info("Hello Fabric world!");
+		ModComponents.initialize();
+		ModMenuTypes.initialize();
         ModItems.initialize();
+
+        ItemComponentTooltipProviderRegistry.addAfter(DataComponents.DAMAGE, ModComponents.LEDGER_TOOLTIP);
 	}
 
 	public static Identifier id(String path) {
