@@ -13,21 +13,20 @@ import net.minecraft.world.item.Item;
 
 public class ModItems {
     
-    public static <T extends Item> T register(String name, Function<Item.Properties, T> itemFactory, Item.Properties settings) {
-        // Create the item key.
-        ResourceKey<Item> itemKey = ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(CopperLedgers.MOD_ID, name));
+    public static final Item COPPER_LEDGER = registerItem(
+        "copper_ledger", props -> new CopperLedger(
+            props.stacksTo(1)
+        ));
 
-        // Create the item instance.
-        T item = itemFactory.apply(settings.setId(itemKey));
-
-        // Register the item
-        Registry.register(BuiltInRegistries.ITEM, itemKey, item);
-
-        return item;
+    private static Item registerItem(String name, Function<Item.Properties, Item> function) {
+        return Registry.register(
+            BuiltInRegistries.ITEM, Identifier.fromNamespaceAndPath(CopperLedgers.MOD_ID, name),
+            function.apply(new Item.Properties().setId(ResourceKey.create(
+                Registries.ITEM,
+                Identifier.fromNamespaceAndPath(CopperLedgers.MOD_ID, name)
+            )))
+        );
     }
-
-    public static final Item COPPER_LEDGER = register(
-        "copper_ledger", Item::new, new Item.Properties().stacksTo(1));
         
     public static void initialize() {
         // add the item to the creative menu
