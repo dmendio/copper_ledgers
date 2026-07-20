@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+        "###",
+        "#B#",
+        "###"
+    ],
+    "key": {
+        "#": "minecraft:copper_ingot",
+        "B": "minecraft:book"
+    },
+    "result": {
+        "id": "copper_ledgers:copper_ledger"
+    }
+}
