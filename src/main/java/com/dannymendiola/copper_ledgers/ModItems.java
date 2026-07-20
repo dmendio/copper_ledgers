@@ -15,7 +15,7 @@ public class ModItems {
     
     public static final Item COPPER_LEDGER = registerItem(
         "copper_ledger", props -> new CopperLedger(
-            props.stacksTo(1)
+            props.stacksTo(64)
         ));
 
     private static Item registerItem(String name, Function<Item.Properties, Item> function) {

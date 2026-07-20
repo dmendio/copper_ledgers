@@ -22,6 +22,8 @@ public class CopperLedgers implements ModInitializer {
 		// Proceed with mild caution.
 
 		LOGGER.info("Hello Fabric world!");
+		ModDataComponents.initialize();
+		ModMenuTypes.initialize();
         ModItems.initialize();
 	}
 
