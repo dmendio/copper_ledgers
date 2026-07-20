@@ -19,11 +19,11 @@ public class CopperLedgerScreen extends AbstractContainerScreen<CopperLedgerMenu
         CopperLedgers.MOD_ID, "textures/gui/ledger/ledger_gui.png"
     );
 
+
     public CopperLedgerScreen(CopperLedgerMenu menu, Inventory playerInventory, Component title) {
-        super(menu, playerInventory, title);
-        // Match the double-chest layout dimensions
-        // this.imageWidth = 176;
-        // this.imageHeight = 222;
+        final int IMAGE_WIDTH = 176;
+        final int IMAGE_HEIGHT = 222;
+        super(menu, playerInventory, title, IMAGE_WIDTH, IMAGE_HEIGHT);
         // Position the inventory label to match the gap between ledger grid and player inventory
         this.inventoryLabelY = this.imageHeight - 94;
     }

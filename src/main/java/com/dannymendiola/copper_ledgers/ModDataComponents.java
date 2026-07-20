@@ -20,7 +20,6 @@ public class ModDataComponents {
     );
 
     public static void initialize() {
-        // Force static initialization of the component type
-        CopperLedgers.LOGGER.info("Registered Copper Ledgers data components");
+        CopperLedgers.LOGGER.info("Registering {} data components", CopperLedgers.MOD_ID);
     }
 }
