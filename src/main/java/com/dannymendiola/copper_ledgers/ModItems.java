@@ -18,7 +18,7 @@ public class ModItems {
     
     public static final Item COPPER_LEDGER = registerItem(
         "copper_ledger", props -> new CopperLedger(
-            props.component(ModComponents.LEDGER_TOOLTIP, new LedgerTooltip(0))
+            props.component(ModComponents.LEDGER_TOOLTIP, new LedgerTooltip())
         ));
 
     private static Item registerItem(String name, Function<Item.Properties, Item> function) {
