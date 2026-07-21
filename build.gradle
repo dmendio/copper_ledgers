@@ -88,3 +88,9 @@ publishing {
 		// retrieving dependencies.
 	}
 }
+
+task runClientDumper(type: JavaExec) {
+	classpath = sourceSets.client.runtimeClasspath
+	mainClass = 'dev.dmendio.copper_ledgers.client.TestClientDumper'
+}
+

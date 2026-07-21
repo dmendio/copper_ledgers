@@ -1,0 +1,42 @@
+package dev.dmendio.copper_ledgers;
+
+import java.util.function.Function;
+
+import dev.dmendio.copper_ledgers.component.LedgerTooltip;
+import dev.dmendio.copper_ledgers.component.ModComponents;
+
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
+
+public class ModItems {
+    
+    public static final Item COPPER_LEDGER = registerItem(
+        "copper_ledger", props -> new CopperLedger(
+            props.component(ModComponents.LEDGER_TOOLTIP, new LedgerTooltip())
+        ));
+
+    private static Item registerItem(String name, Function<Item.Properties, Item> function) {
+        return Registry.register(
+            BuiltInRegistries.ITEM, Identifier.fromNamespaceAndPath(CopperLedgers.MOD_ID, name),
+            function.apply(new Item.Properties().setId(ResourceKey.create(
+                Registries.ITEM,
+                Identifier.fromNamespaceAndPath(CopperLedgers.MOD_ID, name)
+            )))
+        );
+    }
+        
+    public static void initialize() {
+        // add the item to the creative menu
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.TOOLS_AND_UTILITIES)
+            .register((tab) -> {
+                tab.accept(COPPER_LEDGER);
+            });
+    }
+
+}
