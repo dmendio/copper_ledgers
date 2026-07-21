@@ -1,6 +1,6 @@
-package com.dannymendiola.copper_ledgers.component;
+package dev.dmendio.copper_ledgers.component;
 
-import com.dannymendiola.copper_ledgers.CopperLedgers;
+import dev.dmendio.copper_ledgers.CopperLedgers;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;

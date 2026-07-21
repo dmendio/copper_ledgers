@@ -1,9 +1,9 @@
-package com.dannymendiola.copper_ledgers;
+package dev.dmendio.copper_ledgers;
 
 import java.util.function.Function;
 
-import com.dannymendiola.copper_ledgers.component.LedgerTooltip;
-import com.dannymendiola.copper_ledgers.component.ModComponents;
+import dev.dmendio.copper_ledgers.component.LedgerTooltip;
+import dev.dmendio.copper_ledgers.component.ModComponents;
 
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.Registry;

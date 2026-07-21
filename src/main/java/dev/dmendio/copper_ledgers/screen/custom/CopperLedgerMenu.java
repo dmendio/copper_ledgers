@@ -1,9 +1,9 @@
-package com.dannymendiola.copper_ledgers.screen.custom;
+package dev.dmendio.copper_ledgers.screen.custom;
 
-import com.dannymendiola.copper_ledgers.CopperLedger;
-import com.dannymendiola.copper_ledgers.ModMenuTypes;
-import com.dannymendiola.copper_ledgers.component.LedgerContents;
-import com.dannymendiola.copper_ledgers.component.ModComponents;
+import dev.dmendio.copper_ledgers.CopperLedger;
+import dev.dmendio.copper_ledgers.ModMenuTypes;
+import dev.dmendio.copper_ledgers.component.LedgerContents;
+import dev.dmendio.copper_ledgers.component.ModComponents;
 
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.SimpleContainer;

@@ -1,4 +1,4 @@
-package com.dannymendiola.copper_ledgers.component;
+package dev.dmendio.copper_ledgers.component;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.RegistryFriendlyByteBuf;

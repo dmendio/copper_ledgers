@@ -1,4 +1,4 @@
-package com.dannymendiola.copper_ledgers.mixin;
+package dev.dmendio.copper_ledgers.mixin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,9 +9,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.dannymendiola.copper_ledgers.ModItems;
-import com.dannymendiola.copper_ledgers.component.LedgerContents;
-import com.dannymendiola.copper_ledgers.component.ModComponents;
+import dev.dmendio.copper_ledgers.ModItems;
+import dev.dmendio.copper_ledgers.component.LedgerContents;
+import dev.dmendio.copper_ledgers.component.ModComponents;
 
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.PathfinderMob;

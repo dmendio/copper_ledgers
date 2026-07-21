@@ -1,4 +1,4 @@
-package com.dannymendiola.copper_ledgers.client.mixin;
+package dev.dmendio.copper_ledgers.client.mixin;
 
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;

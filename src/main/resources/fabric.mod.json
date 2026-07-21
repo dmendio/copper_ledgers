@@ -3,26 +3,26 @@
 	"id": "copper_ledgers",
 	"version": "${version}",
 	"name": "Copper Ledgers",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Help your golems remember where things go!",
 	"authors": [
-		"Me!"
+		"dmendio"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/dmendio/copper_ledgers"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/copper_ledgers/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.dannymendiola.copper_ledgers.CopperLedgers"
+			"dev.dmendio.copper_ledgers.CopperLedgers"
 		],
 		"client": [
-			"com.dannymendiola.copper_ledgers.client.CopperLedgersClient"
+			"dev.dmendio.copper_ledgers.client.CopperLedgersClient"
 		],
 		"fabric-datagen": [
-			"com.dannymendiola.copper_ledgers.client.CopperLedgersDataGenerator"
+			"dev.dmendio.copper_ledgers.client.CopperLedgersDataGenerator"
 		]
 	},
 	"mixins": [

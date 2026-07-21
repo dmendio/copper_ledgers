@@ -1,4 +1,4 @@
-package com.dannymendiola.copper_ledgers;
+package dev.dmendio.copper_ledgers;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.item.v1.ItemComponentTooltipProviderRegistry;
@@ -8,7 +8,7 @@ import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.dannymendiola.copper_ledgers.component.ModComponents;
+import dev.dmendio.copper_ledgers.component.ModComponents;
 
 public class CopperLedgers implements ModInitializer {
 	public static final String MOD_ID = "copper_ledgers";

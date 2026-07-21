@@ -1,6 +1,6 @@
-package com.dannymendiola.copper_ledgers;
+package dev.dmendio.copper_ledgers;
 
-import com.dannymendiola.copper_ledgers.screen.custom.CopperLedgerMenu;
+import dev.dmendio.copper_ledgers.screen.custom.CopperLedgerMenu;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;

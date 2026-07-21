@@ -1,4 +1,4 @@
-package com.dannymendiola.copper_ledgers.component;
+package dev.dmendio.copper_ledgers.component;
 
 import java.util.ArrayList;
 import java.util.List;

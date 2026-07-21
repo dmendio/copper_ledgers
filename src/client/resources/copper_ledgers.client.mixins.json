@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "com.dannymendiola.copper_ledgers.client.mixin",
+	"package": "dev.dmendio.copper_ledgers.client.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"client": [
 		"ExampleClientMixin"

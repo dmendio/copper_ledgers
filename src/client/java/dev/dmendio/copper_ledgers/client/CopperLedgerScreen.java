@@ -1,10 +1,10 @@
-package com.dannymendiola.copper_ledgers.client;
+package dev.dmendio.copper_ledgers.client;
 
 import java.util.List;
 
-import com.dannymendiola.copper_ledgers.CopperLedgers;
-import com.dannymendiola.copper_ledgers.component.LedgerContents;
-import com.dannymendiola.copper_ledgers.screen.custom.CopperLedgerMenu;
+import dev.dmendio.copper_ledgers.CopperLedgers;
+import dev.dmendio.copper_ledgers.component.LedgerContents;
+import dev.dmendio.copper_ledgers.screen.custom.CopperLedgerMenu;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
