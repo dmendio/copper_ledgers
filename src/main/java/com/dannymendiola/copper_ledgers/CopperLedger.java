@@ -35,16 +35,13 @@ public class CopperLedger extends Item {
             int remaining = stack.getCount() - 1;
             ItemStack splitOff = stack.copyWithCount(remaining);
 
-            // 1. Check if the inventory has enough space, ignoring the active hand slot
             if (!hasSpaceExcludingSlot(player, splitOff, slotIndex)) {
                 // Inventory is full or cannot fit the split stack — abort without opening
                 return InteractionResult.FAIL;
             }
 
-            // 2. Safely insert the split stack into other inventory slots
             insertExcludingSlot(player, splitOff, slotIndex);
 
-            // 3. Set the active hand stack to exactly 1
             stack.setCount(1);
         }
 
@@ -119,6 +116,4 @@ public class CopperLedger extends Item {
         }
     }
 
-    // @Override
-    // public void appendToolTip(ItemStack stack, TooltipContext tipCtx, List<Text> tooltip, TooltipType type)
 }

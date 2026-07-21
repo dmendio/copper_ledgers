@@ -28,14 +28,6 @@ public class CopperLedgerScreen extends AbstractContainerScreen<CopperLedgerMenu
         this.inventoryLabelY = this.imageHeight - 94;
     }
 
-    // @Override
-    // protected void renderBg(/*still not resolved ->*/GuiGraphicsExtractor graphics, float partialTick, int mouseX, int mouseY) {
-    //     graphics.blit(TEXTURE, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
-    // }
-//     @Override
-// public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
-//     // graphics.blit(TEXTURE, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
-// }
     @Override
     public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
         // You must pass the render pipeline as argument #1, and specify texture width/height (usually 256x256) at the end
