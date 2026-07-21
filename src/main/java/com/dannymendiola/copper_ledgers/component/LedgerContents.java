@@ -56,6 +56,10 @@ public record LedgerContents(List<Item> items) {
         return new LedgerContents(List.copyOf(newList));
     }
 
+    public boolean hasItem(Item item) {
+        return items.contains(item);
+    }
+
     public boolean isEmpty() {
         return items.isEmpty();
     }

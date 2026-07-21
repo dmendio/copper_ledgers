@@ -83,7 +83,7 @@ public class CopperLedgerMenu extends AbstractContainerMenu {
     /**
      * Gets the current LedgerContents from the held ledger ItemStack.
      */
-    private LedgerContents getLedgerContents() {
+    public LedgerContents getLedgerContents() {
         ItemStack ledgerStack = playerInventory.getItem(ledgerSlotIndex);
         if (ledgerStack.isEmpty() || !(ledgerStack.getItem() instanceof CopperLedger)) {
             return LedgerContents.EMPTY;
