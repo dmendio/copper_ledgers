@@ -83,6 +83,19 @@ Or if you just want your book back, throw it into a crafting table (at the cost 
 
 ## 🖥️ Compatibility & Requirements
 
-- Works server-side and client-side
 - Minecraft version 26.3
 - Fabric (Requires Fabric API)
+
+##  ✨️ Installation
+
+Copper Ledgers must be installed on both the client and, if applicable, the server, due to custom items and GUIs.
+
+## 🗺️ Potential future features
+
+> These features are tentative ideas I'd like to pursue and are subject to change
+
+- **Server-only Option**
+    - Allow clients to join a Copper Ledger enabled server without installing the mod locally
+- **Recipe Book Ledger Picker**
+    - Allow players to add any item unlocked in the recipe book, instead of requiring the item to be in player inventory
+    - May exist as a toggleable alternative to the existing mechanic
