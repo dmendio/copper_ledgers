@@ -94,8 +94,8 @@ Copper Ledgers must be installed on both the client and, if applicable, the serv
 
 > These features are tentative ideas I'd like to pursue and are subject to change
 
-- **Server-only Option**
-    - Allow clients to join a Copper Ledger enabled server without installing the mod locally
 - **Recipe Book Ledger Picker**
     - Allow players to add any item unlocked in the recipe book, instead of requiring the item to be in player inventory
     - May exist as a toggleable alternative to the existing mechanic
+- **Server-only Option**
+    - Allow clients to join a Copper Ledger enabled server without installing the mod locally

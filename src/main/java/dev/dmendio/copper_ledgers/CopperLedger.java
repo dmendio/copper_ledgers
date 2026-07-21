@@ -4,6 +4,8 @@ import dev.dmendio.copper_ledgers.screen.custom.CopperLedgerMenu;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
@@ -45,6 +47,7 @@ public class CopperLedger extends Item {
             stack.setCount(1);
         }
 
+
         // Open the ledger menu
         if (player instanceof ServerPlayer serverPlayer) {
             final int finalSlotIndex = slotIndex;
@@ -53,6 +56,21 @@ public class CopperLedger extends Item {
                 Component.translatable("container.copper_ledgers.copper_ledger")
             ));
         }
+
+        level.playSound(
+            null,
+            player.getX(), player.getY(), player.getZ(),
+            SoundEvents.COPPER_HIT,
+            SoundSource.PLAYERS,
+            1.0f, 1.0f
+        );
+        level.playSound(
+            null,
+            player.getX(), player.getY(), player.getZ(),
+            SoundEvents.BOOK_PAGE_TURN,
+            SoundSource.PLAYERS,
+            1.0f, 1.0f
+        );
 
         return InteractionResult.SUCCESS;
     }

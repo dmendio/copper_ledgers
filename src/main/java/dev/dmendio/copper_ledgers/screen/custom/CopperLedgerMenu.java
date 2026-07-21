@@ -6,6 +6,7 @@ import dev.dmendio.copper_ledgers.component.LedgerContents;
 import dev.dmendio.copper_ledgers.component.ModComponents;
 
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -149,6 +150,9 @@ public class CopperLedgerMenu extends AbstractContainerMenu {
                 setLedgerContents(newContents);
                 refreshGhostSlots();
                 broadcastChanges();
+
+                player.playSound(SoundEvents.COPPER_HIT, 1.0f, 0.8f);
+
             }
         } else {
             Slot clickedSlot = this.slots.get(slotIndex);
@@ -164,6 +168,8 @@ public class CopperLedgerMenu extends AbstractContainerMenu {
                     setLedgerContents(newContents);
                     refreshGhostSlots();
                     broadcastChanges();
+
+                    player.playSound(SoundEvents.COPPER_STEP);
                 }
             }
         }

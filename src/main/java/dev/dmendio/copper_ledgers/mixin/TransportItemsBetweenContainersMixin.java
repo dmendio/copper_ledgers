@@ -12,12 +12,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import dev.dmendio.copper_ledgers.ModItems;
 import dev.dmendio.copper_ledgers.component.LedgerContents;
 import dev.dmendio.copper_ledgers.component.ModComponents;
-
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.behavior.TransportItemsBetweenContainers;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 @Mixin(TransportItemsBetweenContainers.class)
 public class TransportItemsBetweenContainersMixin {
@@ -43,6 +45,24 @@ public class TransportItemsBetweenContainersMixin {
                 ledgers.add(stack);
             }
         }
+        if (ledgers.size() >= 1) {
+            Level level = body.level();
+            level.playSound(
+                null,
+                body.getX(), body.getY(), body.getZ(),
+                SoundEvents.COPPER_HIT,
+                SoundSource.PLAYERS,
+                1.0f, 1.0f
+            );
+            level.playSound(
+                null,
+                body.getX(), body.getY(), body.getZ(),
+                SoundEvents.BOOK_PAGE_TURN,
+                SoundSource.PLAYERS,
+                1.0f, 1.0f
+            );
+        }
+
 
         for (ItemStack ledger : ledgers) {
             if (ledgerHasItemMatchingHandItem(body, ledger)) {
