@@ -73,9 +73,10 @@ public class CopperLedgerScreen extends AbstractContainerScreen<CopperLedgerMenu
 
     @Override
     public List<Component> getTooltipFromContainerItem(ItemStack stack) {
-        List<Component> lines = super.getTooltipFromContainerItem(stack).subList(0, 1); // just the item name
+        // just the item name
+        List<Component> lines = super.getTooltipFromContainerItem(stack).subList(0, 1);
 
-        // Check if player is hovering over one of the 54 Ledger Slots
+        // Check if player is hovering over one of the 54 ledger slots
         if (this.hoveredSlot != null && this.hoveredSlot.index < CopperLedgerMenu.LEDGER_SLOTS) {
             lines.add(Component.literal(""));
             lines.add(Component.translatable("Ledger entry")
@@ -85,9 +86,7 @@ public class CopperLedgerScreen extends AbstractContainerScreen<CopperLedgerMenu
         } else if (this.hoveredSlot != null) {
             LedgerContents contents = menu.getLedgerContents();
             
-            // check if contents already has hovered item's type
             boolean hasItemType = contents.hasItem(this.hoveredSlot.getItem().getItem());
-            
 
             if (hasItemType) {
                 lines.add(Component.translatable("(Already in ledger)")

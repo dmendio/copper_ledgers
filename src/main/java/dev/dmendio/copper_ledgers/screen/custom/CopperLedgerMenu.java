@@ -126,7 +126,7 @@ public class CopperLedgerMenu extends AbstractContainerMenu {
     }
 
     /**
-     * Overrides all click behavior to implement ghost-slot mechanics.
+     * Overrides all click behavior
      * No physical items are moved. Clicks either add or remove item types from the ledger data.
      */
     @Override
@@ -143,7 +143,6 @@ public class CopperLedgerMenu extends AbstractContainerMenu {
         }
 
         if (slotIndex < LEDGER_SLOTS) {
-            // === Clicked a LEDGER ghost slot → Remove that item type ===
             LedgerContents contents = getLedgerContents();
             if (slotIndex < contents.size()) {
                 LedgerContents newContents = contents.removeItem(slotIndex);
@@ -152,7 +151,6 @@ public class CopperLedgerMenu extends AbstractContainerMenu {
                 broadcastChanges();
             }
         } else {
-            // === Clicked a PLAYER INVENTORY slot → Add item type to the ledger ===
             Slot clickedSlot = this.slots.get(slotIndex);
             ItemStack stackInSlot = clickedSlot.getItem();
 

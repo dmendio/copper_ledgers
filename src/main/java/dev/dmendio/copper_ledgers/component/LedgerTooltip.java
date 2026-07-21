@@ -41,7 +41,6 @@ public record LedgerTooltip() implements TooltipProvider {
                 }
             }
         } else {
-            textConsumer.accept(Component.literal(""));
             textConsumer.accept(Component.translatable("(Blank)").withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC));
         }
     }

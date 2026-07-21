@@ -3,7 +3,6 @@
 	"package": "dev.dmendio.copper_ledgers.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"mixins": [
-		"ExampleMixin",
 		"GrindstoneMenuMixin",
         "TransportItemsBetweenContainersMixin"
 	],
