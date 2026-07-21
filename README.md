@@ -97,5 +97,7 @@ Copper Ledgers must be installed on both the client and, if applicable, the serv
 - **Recipe Book Ledger Picker**
     - Allow players to add any item unlocked in the recipe book, instead of requiring the item to be in player inventory
     - May exist as a toggleable alternative to the existing mechanic
+- **Easier Item Adding**
+    - Allow players to quickly add an item to a ledger by clicking it while the ledger is on their cursor, similar to bundle behavior
 - **Server-only Option**
     - Allow clients to join a Copper Ledger enabled server without installing the mod locally
