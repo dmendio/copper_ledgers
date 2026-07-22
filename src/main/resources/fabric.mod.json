@@ -8,8 +8,9 @@
 		"dmendio"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/dmendio/copper_ledgers"
+		"homepage": "https://github.com/dmendio/copper_ledgers",
+		"sources": "https://github.com/dmendio/copper_ledgers",
+        "issues": "https://github.com/dmendio/copper_ledgers/issues"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/copper_ledgers/icon.png",
