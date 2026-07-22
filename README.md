@@ -1,4 +1,4 @@
-# 🤖 Copper Ledger
+# 🤖 Copper Ledgers
 
 #### **Help your golems remember where things go!**
 
