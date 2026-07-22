@@ -11,6 +11,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 /**
  * Immutable record storing the list of item types registered in a Copper Ledger.
@@ -56,8 +57,19 @@ public record LedgerContents(List<Item> items) {
         return new LedgerContents(List.copyOf(newList));
     }
 
+    public LedgerContents removeItem(Item item) {
+        if (!items.contains(item)) return this;
+        List<Item> newList = new ArrayList<>(items);
+        newList.remove(item);
+        return new LedgerContents(List.copyOf(newList));
+    }
+
     public boolean hasItem(Item item) {
         return items.contains(item);
+    }
+
+    public boolean hasItem(ItemStack itemStack) {
+        return items.contains(itemStack.getItem());
     }
 
     public boolean isEmpty() {

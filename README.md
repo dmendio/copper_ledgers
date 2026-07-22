@@ -32,13 +32,25 @@ Craft a ledger by surrounding a **book** with **8 copper ingots**
 
 ### Adding and removing items
 
-Let's dedicate a chest to ores.
+#### Quick add and remove
+
+Probably the simplest way to edit ledgers is to pick it up on your cursor and left-click on a desired item. A lot like a bundle*:
+
+![Quick add](design/img/quick-add.png)
+
+> 💡 *Note that this doesn't consume the item from your inventory. Ledgers store *records* of item types (up to 54 of them), not the actual items themselves.
+
+Or, if the item is already in the ledger, you can remove it in the same way:
+
+![Quick remove](design/img/quick-remove.png)
+
+Let's start an example: we'll dedicate a chest to a bunch of ore types.
+
+#### Full ledger screen
 
 To open a ledger, right click with it in your hand.
 
-To add an item to the ledger, click on it from your inventory. 
-
-> This adds an entry to the ledger, and does **not** consume the item from your inventory.
+You can add any item from your inventory on this screen by clicking on it.
 
 ![Adding item](design/img/adding_items.png)
 
@@ -48,21 +60,20 @@ Let's say we decided against keeping lapis with these ores. You remove items fro
 
 We can now place the ledger in our desired chest.
 
-### In action
+## ⚙️ Ledgers in Action
 
-In the example below, we'll give the golem a diamond, a netherite ingot, a cookie, and an oak log. We have two chests.
+In the example below, we'll give the golem a diamond, a netherite ingot, a cookie, and an oak log. We have two chests:
 - On the left, we have a double chest with the ore ledger, along with a cookie.
     - Notice how the chest doesn't actually have any actual diamonds or netherite.
 - On the right, we have a small chest, with various types of wood. This will show that chests without ledgers behave normally.
 
 ![Demo](design/img/demo_setup.png)
 
-> #### 🤖 How it works
+> ### 🤖 How it works
 >
-> When searching a chest, golems: 
-> - Check for any ledgers.
-> - If no ledgers are found, or if none of them specify the item in the golem's hand, the golem will fall back on vanilla behavior. 
+> When searching a chest, golems now immediately check for one or more ledgers.
 > - If a ledger is found that specifies the golem's item, the golem will treat that chest as if it has that item
+> - If no ledgers are found, or if none of them specify the item in the golem's hand, the golem will fall back on vanilla behavior. 
 
 With this in mind, we expect the golem to put the diamond, netherite, and cookie into the double chest, and the oak log into the single.
 
@@ -70,7 +81,7 @@ And as you can see, that's exactly what happens!
 
 ![Demo gif](design/img/copper_ledger_demo.gif)
 
-## 🚮 Clear and de-craft
+### 🚮 Clear and de-craft
 
 If you'd like to clear a ledger, you can either spam click the items away, or scrape it off in a grindstone
 
@@ -97,7 +108,5 @@ Copper Ledgers must be installed on both the client and, if applicable, the serv
 - **Recipe Book Ledger Picker**
     - Allow players to add any item unlocked in the recipe book, instead of requiring the item to be in player inventory
     - May exist as a toggleable alternative to the existing mechanic
-- **Easier Item Adding**
-    - Allow players to quickly add an item to a ledger by clicking it while the ledger is on their cursor, similar to bundle behavior
 - **Server-only Option**
     - Allow clients to join a Copper Ledger enabled server without installing the mod locally

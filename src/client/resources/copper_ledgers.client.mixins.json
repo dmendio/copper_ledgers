@@ -3,6 +3,8 @@
 	"package": "dev.dmendio.copper_ledgers.client.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"client": [
+
+        "AbstractContainerScreenMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
