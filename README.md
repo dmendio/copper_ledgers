@@ -94,7 +94,7 @@ Or if you just want your book back, throw it into a crafting table (at the cost 
 
 ## 🖥️ Compatibility & Requirements
 
-- Minecraft version 26.3
+- Minecraft version 26.2
 - Fabric (Requires Fabric API)
 
 ##  ✨️ Installation
