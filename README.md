@@ -2,7 +2,7 @@
 
 #### **Help your golems remember where things go!**
 
-![Copper Ledger Icon](src/main/resources/assets/copper_ledgers/icon.png)
+![Copper Ledger showcase banner](https://www.dannymendiola.com/images/copper_ledgers/banner.png)
 
 
 ## ℹ️ The mod
