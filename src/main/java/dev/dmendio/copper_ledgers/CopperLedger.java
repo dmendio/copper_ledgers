@@ -147,10 +147,11 @@ public class CopperLedger extends Item {
 
         ItemStack hoveredItem = slot.getItem();
 
+        // TODO check if removing commented condition breaks vanilla item manipulation
         if (
             self.getCount() != 1 || 
-            hoveredItem.isEmpty() || 
-            hoveredItem.is(ModItems.COPPER_LEDGER)
+            hoveredItem.isEmpty() // ||
+            // hoveredItem.is(ModItems.COPPER_LEDGER)
         ) return false;
 
         LedgerContents contents = self.getOrDefault(ModComponents.LEDGER_CONTENTS, LedgerContents.EMPTY);

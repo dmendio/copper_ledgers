@@ -45,7 +45,6 @@ public abstract class AbstractContainerScreenMixin extends Screen {
     @Inject(method = "extractTooltip", at = @At("HEAD"), cancellable = true)
     private void addLedgerQuickAddTooltip(final GuiGraphicsExtractor graphics, final int mouseX, final int mouseY, CallbackInfo ci) {
 
-        // if (this.hoveredSlot != null && this.hoveredSlot.getClass().getName().contains("Creative")) return;
         if ((
             (Screen)this) instanceof CreativeModeInventoryScreen creativeScreen && 
             !creativeScreen.isInventoryOpen()
@@ -55,7 +54,8 @@ public abstract class AbstractContainerScreenMixin extends Screen {
             ItemStack cursorStack = this.menu.getCarried();
             ItemStack hoveredItem = this.hoveredSlot.getItem();
 
-            if (hoveredItem.is(ModItems.COPPER_LEDGER)) return;
+            // TODO Check if removine this breaks vanilla item manipulation
+            // if (hoveredItem.is(ModItems.COPPER_LEDGER)) return;
 
             if (
                 (cursorStack != null && hoveredItem != null) &&
