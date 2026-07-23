@@ -55,12 +55,12 @@ public abstract class AbstractContainerScreenMixin extends Screen {
             ItemStack cursorStack = this.menu.getCarried();
             ItemStack hoveredItem = this.hoveredSlot.getItem();
 
-            if (hoveredItem.getItem().equals(ModItems.COPPER_LEDGER)) return;
+            if (hoveredItem.is(ModItems.COPPER_LEDGER)) return;
 
             if (
                 (cursorStack != null && hoveredItem != null) &&
                 cursorStack.count() == 1 &&
-                cursorStack.getItem().equals(ModItems.COPPER_LEDGER)
+                cursorStack.is(ModItems.COPPER_LEDGER)
             ) {
                 String hoveredName = this.getTooltipFromContainerItem(hoveredItem).get(0).getString();
 

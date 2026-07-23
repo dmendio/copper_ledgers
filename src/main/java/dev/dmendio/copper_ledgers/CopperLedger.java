@@ -150,7 +150,7 @@ public class CopperLedger extends Item {
         if (
             self.getCount() != 1 || 
             hoveredItem.isEmpty() || 
-            hoveredItem.getItem().equals(ModItems.COPPER_LEDGER)
+            hoveredItem.is(ModItems.COPPER_LEDGER)
         ) return false;
 
         LedgerContents contents = self.getOrDefault(ModComponents.LEDGER_CONTENTS, LedgerContents.EMPTY);
