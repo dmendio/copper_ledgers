@@ -54,9 +54,6 @@ public abstract class AbstractContainerScreenMixin extends Screen {
             ItemStack cursorStack = this.menu.getCarried();
             ItemStack hoveredItem = this.hoveredSlot.getItem();
 
-            // TODO Check if removine this breaks vanilla item manipulation
-            // if (hoveredItem.is(ModItems.COPPER_LEDGER)) return;
-
             if (
                 (cursorStack != null && hoveredItem != null) &&
                 cursorStack.count() == 1 &&
@@ -64,17 +61,35 @@ public abstract class AbstractContainerScreenMixin extends Screen {
             ) {
                 String hoveredName = this.getTooltipFromContainerItem(hoveredItem).get(0).getString();
 
-                List<Component> newTooltip = new ArrayList<Component>();
-                newTooltip.add(Component.translatable(hoveredName).withStyle(ChatFormatting.GRAY));
+                String clickType = hoveredItem.is(ModItems.COPPER_LEDGER) ? "Shift+Click" : "Click";
 
-                
+                List<Component> newTooltip = new ArrayList<Component>();
+
                 LedgerContents ledgerContents = cursorStack.get(ModComponents.LEDGER_CONTENTS);
+
+                newTooltip.add(Component.translatable(
+                    hoveredName +
+                    (ledgerContents.hasItem(hoveredItem) ? "" : " -> Ledger")
+                ));
+
+
                 if (ledgerContents != null && ledgerContents.items().size() == LedgerContents.MAX_ENTRIES && !ledgerContents.hasItem(hoveredItem)) {
                     newTooltip.add(Component.translatable("Ledger is full!").withStyle(ChatFormatting.DARK_RED, ChatFormatting.ITALIC));
                 } else if (ledgerContents != null && ledgerContents.hasItem(hoveredItem)) {
-                    newTooltip.add(Component.translatable("Click to remove from ledger").withStyle(ChatFormatting.YELLOW, ChatFormatting.ITALIC));
+                    newTooltip.add(Component.translatable(
+                        "Already in ledger"
+                    ).withStyle(ChatFormatting.GRAY));
+                    newTooltip.add(Component.translatable(
+                        clickType + " to remove")
+                        .withStyle(
+                            ChatFormatting.YELLOW, ChatFormatting.ITALIC
+                    ));
                 } else {
-                    newTooltip.add(Component.translatable("Click to add to ledger").withStyle(ChatFormatting.DARK_GREEN, ChatFormatting.ITALIC));
+                    newTooltip.add(Component.translatable(
+                        clickType + " to add")
+                        .withStyle(
+                            ChatFormatting.DARK_GREEN, ChatFormatting.ITALIC
+                    ));
                 }
 
                 graphics.setTooltipForNextFrame(

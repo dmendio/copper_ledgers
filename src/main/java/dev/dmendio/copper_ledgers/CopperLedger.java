@@ -158,9 +158,9 @@ public class CopperLedger extends Item {
 
 
         if (contents.hasItem(hoveredItem)) {
-            LedgerContents newContents = contents.removeItem(hoveredItem.getItem());
+            LedgerContents newContents = contents.getItemsWithRemoved(hoveredItem.getItem());
 
-            if (newContents.items().size() == 0) {
+            if (newContents.isEmpty()) {
                 self.remove(ModComponents.LEDGER_CONTENTS);
                 self.set(DataComponents.MAX_STACK_SIZE, 64);
             } else {
@@ -176,7 +176,7 @@ public class CopperLedger extends Item {
 
             self.set(
                 ModComponents.LEDGER_CONTENTS,
-                contents.addItem(hoveredItem.getItem())
+                contents.getItemsWithAdded(hoveredItem.getItem())
             );
             self.set(DataComponents.MAX_STACK_SIZE, 1);
 
