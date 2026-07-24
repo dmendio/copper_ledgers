@@ -146,7 +146,7 @@ public class CopperLedgerMenu extends AbstractContainerMenu {
         if (slotIndex < LEDGER_SLOTS) {
             LedgerContents contents = getLedgerContents();
             if (slotIndex < contents.size()) {
-                LedgerContents newContents = contents.removeItem(slotIndex);
+                LedgerContents newContents = contents.getItemsWithRemoved(slotIndex);
                 setLedgerContents(newContents);
                 refreshGhostSlots();
                 broadcastChanges();
@@ -161,7 +161,7 @@ public class CopperLedgerMenu extends AbstractContainerMenu {
             if (!stackInSlot.isEmpty() && stackInSlot.getItem() != Items.AIR) {
                 Item itemType = stackInSlot.getItem();
                 LedgerContents contents = getLedgerContents();
-                LedgerContents newContents = contents.addItem(itemType);
+                LedgerContents newContents = contents.getItemsWithAdded(itemType);
 
                 // Only update if something actually changed (item wasn't a duplicate)
                 if (newContents != contents) {

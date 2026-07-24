@@ -6,6 +6,7 @@ import java.util.List;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+import dev.dmendio.copper_ledgers.CopperLedger;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -39,7 +40,7 @@ public record LedgerContents(List<Item> items) {
      * Returns a new LedgerContents with the given item appended, if not already present
      * and the list hasn't reached capacity.
      */
-    public LedgerContents addItem(Item item) {
+    public LedgerContents getItemsWithAdded(Item item) {
         if (items.size() >= MAX_ENTRIES) return this;
         if (items.contains(item)) return this;
         List<Item> newList = new ArrayList<>(items);
@@ -47,21 +48,29 @@ public record LedgerContents(List<Item> items) {
         return new LedgerContents(List.copyOf(newList));
     }
 
+    public LedgerContents getItemsWithAdded(ItemStack stack) {
+        return getItemsWithAdded(stack.getItem());
+    }
+
     /**
      * Returns a new LedgerContents with the item at the given index removed.
      */
-    public LedgerContents removeItem(int index) {
+    public LedgerContents getItemsWithRemoved(int index) {
         if (index < 0 || index >= items.size()) return this;
         List<Item> newList = new ArrayList<>(items);
         newList.remove(index);
         return new LedgerContents(List.copyOf(newList));
     }
 
-    public LedgerContents removeItem(Item item) {
+    public LedgerContents getItemsWithRemoved(Item item) {
         if (!items.contains(item)) return this;
         List<Item> newList = new ArrayList<>(items);
         newList.remove(item);
         return new LedgerContents(List.copyOf(newList));
+    }
+
+    public LedgerContents getItemsWithRemoved(ItemStack stack) {
+        return getItemsWithRemoved(stack.getItem());
     }
 
     public boolean hasItem(Item item) {

@@ -17,8 +17,6 @@ public class CopperLedgers implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		LOGGER.info("Hello Copper Ledgers!");
-
 		ModComponents.initialize();
 		ModMenuTypes.initialize();
         ModItems.initialize();

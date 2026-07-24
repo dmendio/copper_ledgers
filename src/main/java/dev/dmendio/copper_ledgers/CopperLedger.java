@@ -147,19 +147,20 @@ public class CopperLedger extends Item {
 
         ItemStack hoveredItem = slot.getItem();
 
+        // TODO check if removing commented condition breaks vanilla item manipulation
         if (
             self.getCount() != 1 || 
-            hoveredItem.isEmpty() || 
-            hoveredItem.getItem().equals(ModItems.COPPER_LEDGER)
+            hoveredItem.isEmpty() // ||
+            // hoveredItem.is(ModItems.COPPER_LEDGER)
         ) return false;
 
         LedgerContents contents = self.getOrDefault(ModComponents.LEDGER_CONTENTS, LedgerContents.EMPTY);
 
 
         if (contents.hasItem(hoveredItem)) {
-            LedgerContents newContents = contents.removeItem(hoveredItem.getItem());
+            LedgerContents newContents = contents.getItemsWithRemoved(hoveredItem.getItem());
 
-            if (newContents.items().size() == 0) {
+            if (newContents.isEmpty()) {
                 self.remove(ModComponents.LEDGER_CONTENTS);
                 self.set(DataComponents.MAX_STACK_SIZE, 64);
             } else {
@@ -175,7 +176,7 @@ public class CopperLedger extends Item {
 
             self.set(
                 ModComponents.LEDGER_CONTENTS,
-                contents.addItem(hoveredItem.getItem())
+                contents.getItemsWithAdded(hoveredItem.getItem())
             );
             self.set(DataComponents.MAX_STACK_SIZE, 1);
 

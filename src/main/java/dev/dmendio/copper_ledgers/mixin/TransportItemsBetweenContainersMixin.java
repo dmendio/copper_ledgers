@@ -27,7 +27,7 @@ public class TransportItemsBetweenContainersMixin {
     // TransportItemsBetweenContainers::doReachedTargetInteraction()
     @Inject(method="Lnet/minecraft/world/entity/ai/behavior/TransportItemsBetweenContainers;doReachedTargetInteraction(Lnet/minecraft/world/entity/PathfinderMob;Lnet/minecraft/world/Container;Ljava/util/function/BiConsumer;Ljava/util/function/BiConsumer;Ljava/util/function/BiConsumer;Ljava/util/function/BiConsumer;)V", at = @At("HEAD"), cancellable = true)
     private void checkCopperLedgers(
-        final PathfinderMob body,
+        final PathfinderMob golem,
         final Container container,
         final BiConsumer<PathfinderMob, Container> onPickupSuccess,
         final BiConsumer<PathfinderMob, Container> onPickupFailure,
@@ -37,45 +37,70 @@ public class TransportItemsBetweenContainersMixin {
     ) {
         int chestSize = container.getContainerSize();
 
-        List<ItemStack> ledgers = new ArrayList<>();
+        List<ItemStack> chestLedgers = new ArrayList<>();
 
         for (int i = 0; i < chestSize; i++) {
             ItemStack stack = container.getItem(i);
             if (stack.is(ModItems.COPPER_LEDGER)) {
-                ledgers.add(stack);
+                chestLedgers.add(stack);
             }
         }
-        if (ledgers.size() >= 1) {
-            Level level = body.level();
+
+        // Play a sound if the golem is going through a ledger
+        if (chestLedgers.size() >= 1) {
+            Level level = golem.level();
             level.playSound(
                 null,
-                body.getX(), body.getY(), body.getZ(),
+                golem.getX(), golem.getY(), golem.getZ(),
                 SoundEvents.COPPER_HIT,
                 SoundSource.PLAYERS,
                 1.0f, 1.0f
             );
             level.playSound(
                 null,
-                body.getX(), body.getY(), body.getZ(),
+                golem.getX(), golem.getY(), golem.getZ(),
                 SoundEvents.BOOK_PAGE_TURN,
                 SoundSource.PLAYERS,
                 1.0f, 1.0f
             );
         }
 
+        boolean holdingLedger = golem.getMainHandItem().is(ModItems.COPPER_LEDGER);
 
-        for (ItemStack ledger : ledgers) {
-            if (ledgerHasItemMatchingHandItem(body, ledger)) {
+        if (holdingLedger) {
+            for (ItemStack ledger : chestLedgers) {
+                if (ledger.get(ModComponents.LEDGER_CONTENTS) == null) {
+                    onPlaceSuccess.accept(golem, container);
+                    ci.cancel();
+                    return;
+                }
+
+                if (ledgerHasItemMatchingHandItem(golem, ledger)) {
+                    onPlaceSuccess.accept(golem, container);
+                    ci.cancel();
+                    return;
+                }
+            }
+            if (!chestLedgers.isEmpty()) {
+                // the only ledgers in the chest are non-empty and do not specify ledger
+                onPlaceFailure.accept(golem, container);
+                ci.cancel();
+            }
+            return;
+        }
+
+        for (ItemStack ledger : chestLedgers) {
+            if (ledgerHasItemMatchingHandItem(golem, ledger)) {
                 // have the golem place the item and cancel out of default method
-                onPlaceSuccess.accept(body, container);
+                onPlaceSuccess.accept(golem, container);
                 ci.cancel();
                 return;
             }
         }
     }
 
-    private static boolean ledgerHasItemMatchingHandItem(final PathfinderMob body, final ItemStack ledger) {
-        Item golemHandItem = body.getMainHandItem().getItem();
+    private static boolean ledgerHasItemMatchingHandItem(final PathfinderMob golem, final ItemStack ledger) {
+        Item golemHandItem = golem.getMainHandItem().getItem();
         LedgerContents contents = ledger.get(ModComponents.LEDGER_CONTENTS);
         if (contents == null) return false;
         return contents.hasItem(golemHandItem);
