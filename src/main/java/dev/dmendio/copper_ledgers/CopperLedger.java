@@ -24,6 +24,52 @@ public class CopperLedger extends Item {
     }
 
     @Override
+    public boolean overrideStackedOnOther(final ItemStack self, final Slot slot, final ClickAction clickAction, final Player player) {
+
+        if (
+            clickAction != ClickAction.PRIMARY
+        ) return false;
+
+        ItemStack hoveredItem = slot.getItem();
+
+        if (
+            self.getCount() != 1 || 
+            hoveredItem.isEmpty()
+        ) return false;
+
+        LedgerContents contents = self.getOrDefault(ModComponents.LEDGER_CONTENTS, LedgerContents.EMPTY);
+
+
+        if (contents.hasItem(hoveredItem)) {
+            LedgerContents newContents = contents.getItemsWithRemoved(hoveredItem.getItem());
+
+            if (newContents.isEmpty()) {
+                self.remove(ModComponents.LEDGER_CONTENTS);
+                self.set(DataComponents.MAX_STACK_SIZE, 64);
+            } else {
+                self.set(ModComponents.LEDGER_CONTENTS, newContents);
+            }
+
+            player.playSound(SoundEvents.COPPER_HIT, 1.0f, 0.8f);
+
+        } else {
+            if (contents.items().size() == LedgerContents.MAX_ENTRIES) {
+                return false;
+            }
+
+            self.set(
+                ModComponents.LEDGER_CONTENTS,
+                contents.getItemsWithAdded(hoveredItem.getItem())
+            );
+            self.set(DataComponents.MAX_STACK_SIZE, 1);
+
+            player.playSound(SoundEvents.COPPER_STEP);
+        }
+
+        return true; //super.overrideStackedOnOther(self, slot, clickAction, player);
+    }
+
+    @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
         if (level.isClientSide()) {
             return InteractionResult.SUCCESS;
@@ -77,6 +123,24 @@ public class CopperLedger extends Item {
         );
 
         return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public boolean isBarVisible(final ItemStack stack) {
+        return stack.get(ModComponents.LEDGER_CONTENTS) != null;
+    }
+
+    @Override
+    public int getBarWidth(final ItemStack stack) {
+        LedgerContents contents = stack.get(ModComponents.LEDGER_CONTENTS);
+        int val = contents == null ? 0 : contents.items().size();
+        
+        return (int)Math.floor((val / (double)LedgerContents.MAX_ENTRIES) * 13);
+    }
+
+    @Override
+    public int getBarColor(final ItemStack stack) {
+        return 0x7790fe;
     }
 
     /**
@@ -138,52 +202,5 @@ public class CopperLedger extends Item {
         }
     }
 
-    @Override
-    public boolean overrideStackedOnOther(final ItemStack self, final Slot slot, final ClickAction clickAction, final Player player) {
-
-        if (
-            clickAction != ClickAction.PRIMARY
-        ) return false;
-
-        ItemStack hoveredItem = slot.getItem();
-
-        // TODO check if removing commented condition breaks vanilla item manipulation
-        if (
-            self.getCount() != 1 || 
-            hoveredItem.isEmpty() // ||
-            // hoveredItem.is(ModItems.COPPER_LEDGER)
-        ) return false;
-
-        LedgerContents contents = self.getOrDefault(ModComponents.LEDGER_CONTENTS, LedgerContents.EMPTY);
-
-
-        if (contents.hasItem(hoveredItem)) {
-            LedgerContents newContents = contents.getItemsWithRemoved(hoveredItem.getItem());
-
-            if (newContents.isEmpty()) {
-                self.remove(ModComponents.LEDGER_CONTENTS);
-                self.set(DataComponents.MAX_STACK_SIZE, 64);
-            } else {
-                self.set(ModComponents.LEDGER_CONTENTS, newContents);
-            }
-
-            player.playSound(SoundEvents.COPPER_HIT, 1.0f, 0.8f);
-
-        } else {
-            if (contents.items().size() == LedgerContents.MAX_ENTRIES) {
-                return false;
-            }
-
-            self.set(
-                ModComponents.LEDGER_CONTENTS,
-                contents.getItemsWithAdded(hoveredItem.getItem())
-            );
-            self.set(DataComponents.MAX_STACK_SIZE, 1);
-
-            player.playSound(SoundEvents.COPPER_STEP);
-        }
-
-        return true; //super.overrideStackedOnOther(self, slot, clickAction, player);
-    }
 
 }

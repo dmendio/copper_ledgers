@@ -69,13 +69,18 @@ public abstract class AbstractContainerScreenMixin extends Screen {
 
                 newTooltip.add(Component.translatable(
                     hoveredName +
-                    (ledgerContents.hasItem(hoveredItem) ? "" : " -> Ledger")
+                    (ledgerContents == null || !ledgerContents.hasItem(hoveredItem) ? "-> Ledger" : "")
                 ));
 
-
-                if (ledgerContents != null && ledgerContents.items().size() == LedgerContents.MAX_ENTRIES && !ledgerContents.hasItem(hoveredItem)) {
+                if (
+                    ledgerContents != null &&
+                    ledgerContents.items().size() == LedgerContents.MAX_ENTRIES && 
+                    !ledgerContents.hasItem(hoveredItem)
+                ) {
                     newTooltip.add(Component.translatable("Ledger is full!").withStyle(ChatFormatting.DARK_RED, ChatFormatting.ITALIC));
-                } else if (ledgerContents != null && ledgerContents.hasItem(hoveredItem)) {
+                } else if (
+                    ledgerContents != null && 
+                    ledgerContents.hasItem(hoveredItem)) {
                     newTooltip.add(Component.translatable(
                         "Already in ledger"
                     ).withStyle(ChatFormatting.GRAY));

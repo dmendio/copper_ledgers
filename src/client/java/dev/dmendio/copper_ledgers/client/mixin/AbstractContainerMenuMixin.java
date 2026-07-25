@@ -1,16 +1,18 @@
 package dev.dmendio.copper_ledgers.client.mixin;
 
+import java.util.List;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import dev.dmendio.copper_ledgers.CopperLedgers;
 import dev.dmendio.copper_ledgers.ModItems;
 import dev.dmendio.copper_ledgers.component.LedgerContents;
 import dev.dmendio.copper_ledgers.component.ModComponents;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerInput;
@@ -31,17 +33,19 @@ public abstract class AbstractContainerMenuMixin {
             containerInput == ContainerInput.QUICK_MOVE &&
             carried.is(ModItems.COPPER_LEDGER)
         ) {
-            // ((AbstractContainerMenu)this).getSlot(slotIndex)
             AbstractContainerMenu thisMenu = (AbstractContainerMenu)(Object)this;
 
             if (slotIndex >= 0 && slotIndex < thisMenu.slots.size()) {
                 Slot clickedSlot = thisMenu.getSlot(slotIndex);
                 if (clickedSlot.getItem().is(ModItems.COPPER_LEDGER)) {
+
                     LedgerContents carriedContents = carried.get(ModComponents.LEDGER_CONTENTS);
 
                     ItemStack clickedLedger = clickedSlot.getItem();
 
-                    if (carriedContents.hasItem(clickedLedger)) {
+                    boolean hasItem = carriedContents != null && carriedContents.hasItem(clickedLedger);
+
+                    if (hasItem) {
                         LedgerContents newContents = carriedContents.getItemsWithRemoved(clickedLedger);
 
                         if (newContents.isEmpty()) {
@@ -50,11 +54,16 @@ public abstract class AbstractContainerMenuMixin {
                         } else {
                             carried.set(ModComponents.LEDGER_CONTENTS, newContents);
                         }
+
+                        player.playSound(SoundEvents.COPPER_HIT, 1.0f, 0.8f);
                     } else {
                         carried.set(
                             ModComponents.LEDGER_CONTENTS, 
-                            carriedContents.getItemsWithAdded(clickedLedger)
+                            carriedContents == null
+                                ? new LedgerContents(List.of(clickedLedger.getItem()))
+                                : carriedContents.getItemsWithAdded(clickedLedger)
                         );
+                        player.playSound(SoundEvents.COPPER_STEP);
                     }
                     
                     ci.cancel();
