@@ -1,11 +1,14 @@
 package dev.dmendio.copper_ledgers.client.mixin;
 
+import java.util.List;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import dev.dmendio.copper_ledgers.CopperLedgers;
 import dev.dmendio.copper_ledgers.ModItems;
 import dev.dmendio.copper_ledgers.component.LedgerContents;
 import dev.dmendio.copper_ledgers.component.ModComponents;
@@ -30,7 +33,6 @@ public abstract class AbstractContainerMenuMixin {
             containerInput == ContainerInput.QUICK_MOVE &&
             carried.is(ModItems.COPPER_LEDGER)
         ) {
-            // ((AbstractContainerMenu)this).getSlot(slotIndex)
             AbstractContainerMenu thisMenu = (AbstractContainerMenu)(Object)this;
 
             if (slotIndex >= 0 && slotIndex < thisMenu.slots.size()) {
@@ -39,11 +41,11 @@ public abstract class AbstractContainerMenuMixin {
 
                     LedgerContents carriedContents = carried.get(ModComponents.LEDGER_CONTENTS);
 
-                    if (carriedContents == null) return;
-
                     ItemStack clickedLedger = clickedSlot.getItem();
 
-                    if (carriedContents.hasItem(clickedLedger)) {
+                    boolean hasItem = carriedContents != null && carriedContents.hasItem(clickedLedger);
+
+                    if (hasItem) {
                         LedgerContents newContents = carriedContents.getItemsWithRemoved(clickedLedger);
 
                         if (newContents.isEmpty()) {
@@ -55,7 +57,9 @@ public abstract class AbstractContainerMenuMixin {
                     } else {
                         carried.set(
                             ModComponents.LEDGER_CONTENTS, 
-                            carriedContents.getItemsWithAdded(clickedLedger)
+                            carriedContents == null
+                                ? new LedgerContents(List.of(clickedLedger.getItem()))
+                                : carriedContents.getItemsWithAdded(clickedLedger)
                         );
                     }
                     
