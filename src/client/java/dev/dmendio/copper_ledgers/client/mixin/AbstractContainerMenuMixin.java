@@ -8,11 +8,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import dev.dmendio.copper_ledgers.CopperLedgers;
 import dev.dmendio.copper_ledgers.ModItems;
 import dev.dmendio.copper_ledgers.component.LedgerContents;
 import dev.dmendio.copper_ledgers.component.ModComponents;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerInput;
@@ -54,6 +54,8 @@ public abstract class AbstractContainerMenuMixin {
                         } else {
                             carried.set(ModComponents.LEDGER_CONTENTS, newContents);
                         }
+
+                        player.playSound(SoundEvents.COPPER_HIT, 1.0f, 0.8f);
                     } else {
                         carried.set(
                             ModComponents.LEDGER_CONTENTS, 
@@ -61,6 +63,7 @@ public abstract class AbstractContainerMenuMixin {
                                 ? new LedgerContents(List.of(clickedLedger.getItem()))
                                 : carriedContents.getItemsWithAdded(clickedLedger)
                         );
+                        player.playSound(SoundEvents.COPPER_STEP);
                     }
                     
                     ci.cancel();
