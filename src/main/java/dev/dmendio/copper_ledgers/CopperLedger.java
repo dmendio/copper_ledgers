@@ -70,11 +70,6 @@ public class CopperLedger extends Item {
     }
 
     @Override
-    public boolean isBarVisible(final ItemStack stack) {
-        return stack.get(ModComponents.LEDGER_CONTENTS) != null;
-    }
-
-    @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
         if (level.isClientSide()) {
             return InteractionResult.SUCCESS;
@@ -128,6 +123,24 @@ public class CopperLedger extends Item {
         );
 
         return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public boolean isBarVisible(final ItemStack stack) {
+        return stack.get(ModComponents.LEDGER_CONTENTS) != null;
+    }
+
+    @Override
+    public int getBarWidth(final ItemStack stack) {
+        LedgerContents contents = stack.get(ModComponents.LEDGER_CONTENTS);
+        int val = contents == null ? 0 : contents.items().size();
+        
+        return (int)Math.floor((val / (double)LedgerContents.MAX_ENTRIES) * 13);
+    }
+
+    @Override
+    public int getBarColor(final ItemStack stack) {
+        return 0x7790fe;
     }
 
     /**

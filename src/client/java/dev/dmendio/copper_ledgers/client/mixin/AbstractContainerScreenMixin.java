@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import dev.dmendio.copper_ledgers.CopperLedgers;
 import dev.dmendio.copper_ledgers.ModItems;
 import dev.dmendio.copper_ledgers.component.LedgerContents;
 import dev.dmendio.copper_ledgers.component.ModComponents;
