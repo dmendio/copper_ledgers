@@ -6,7 +6,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import dev.dmendio.copper_ledgers.CopperLedgers;
 import dev.dmendio.copper_ledgers.ModItems;
 import dev.dmendio.copper_ledgers.component.LedgerContents;
 import dev.dmendio.copper_ledgers.component.ModComponents;
@@ -37,7 +36,10 @@ public abstract class AbstractContainerMenuMixin {
             if (slotIndex >= 0 && slotIndex < thisMenu.slots.size()) {
                 Slot clickedSlot = thisMenu.getSlot(slotIndex);
                 if (clickedSlot.getItem().is(ModItems.COPPER_LEDGER)) {
+
                     LedgerContents carriedContents = carried.get(ModComponents.LEDGER_CONTENTS);
+
+                    if (carriedContents == null) return;
 
                     ItemStack clickedLedger = clickedSlot.getItem();
 
