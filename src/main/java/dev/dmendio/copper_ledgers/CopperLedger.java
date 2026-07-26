@@ -34,11 +34,11 @@ public class CopperLedger extends Item {
 
         if (
             self.getCount() != 1 || 
-            hoveredItem.isEmpty()
+            hoveredItem.isEmpty() || 
+            hoveredItem.is(ModItems.COPPER_LEDGER)
         ) return false;
 
         LedgerContents contents = self.getOrDefault(ModComponents.LEDGER_CONTENTS, LedgerContents.EMPTY);
-
 
         if (contents.hasItem(hoveredItem)) {
             LedgerContents newContents = contents.getItemsWithRemoved(hoveredItem.getItem());
