@@ -42,6 +42,7 @@ public abstract class AbstractContainerScreenMixin extends Screen {
     @Shadow
     protected abstract List<Component> getTooltipFromContainerItem(final ItemStack itemStack);
 
+    // Ledger tooltip for quick add/remove
     @Inject(method = "extractTooltip", at = @At("HEAD"), cancellable = true)
     private void addLedgerQuickAddTooltip(final GuiGraphicsExtractor graphics, final int mouseX, final int mouseY, CallbackInfo ci) {
 
@@ -107,6 +108,45 @@ public abstract class AbstractContainerScreenMixin extends Screen {
                 );
     
                 ci.cancel();
+            }
+        }
+    }
+
+    // Highlight other slots when ledger on cursor
+    @Inject(
+        method = "extractContents",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;extractSlots(Lnet/minecraft/client/gui/GuiGraphicsExtractor;II)V",
+            shift = At.Shift.AFTER
+        )
+    )
+    private void renderLedgerSlotIndicators(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a, CallbackInfo ci) {
+        ItemStack carried = this.menu.getCarried();
+        if (carried.isEmpty() || !(carried.is(ModItems.COPPER_LEDGER))) {
+            return;
+        }
+
+        LedgerContents contents = carried.get(ModComponents.LEDGER_CONTENTS);
+        if (contents == null || contents.items().isEmpty()) {
+            return;
+        }
+
+        for (Slot slot : this.menu.slots) {
+            if (!slot.isActive()) {
+                continue;
+            }
+
+            ItemStack slotStack = slot.getItem();
+            if (slotStack.isEmpty()) {
+                continue;
+            }
+
+            int x = slot.x;
+            int y = slot.y;
+
+            if (contents.hasItem(slotStack.getItem())) {
+                graphics.fill(x, y, x + 16, y + 16, 0x60c0c0c0);
             }
         }
     }
