@@ -70,7 +70,7 @@ public abstract class AbstractContainerScreenMixin extends Screen {
 
                 newTooltip.add(Component.translatable(
                     hoveredName +
-                    (ledgerContents == null || !ledgerContents.hasItem(hoveredItem) ? "-> Ledger" : "")
+                    (ledgerContents == null || !ledgerContents.hasItem(hoveredItem) ? " -> Ledger" : "")
                 ));
 
                 if (
